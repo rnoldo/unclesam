@@ -3,14 +3,20 @@
 {% block description %}
 <meta name="description" content="{{category.metadata.description}}" />
 {% endblock%}
+{% set is_index = request.path in ['/category', '/cateogroy/', "/index", "/index/", "/"] %}
 <!-- Content -->
 {% block nav %}
 <div class="row">
 	<div class="small-12 medium-12 large-12 small-centered columns">
 	    <nav>
 	        <ul class="inline-list-custom">
+	        	{% if is_index %}
 	            <li><a href="/index" class="current">主页</a>
 	            </li>
+	            {% else %}
+	            <li><a href="/index">主页</a>
+	            </li>
+	            {% endif %}
 	            <li><a href="/about">联系我们</a>
 	            </li>
 	        </ul>
@@ -19,7 +25,7 @@
 </div>
 {% endblock %}
 {% block content %}
-{% if request.path not  in ['/category', '/cateogroy/', "/index", "/index/", "/"] %}
+{% if not is_index %}
 	<div class="container" id="posts">
 		{% include 'include/posts_list.html' %}
 	</div>

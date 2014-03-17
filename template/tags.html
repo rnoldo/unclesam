@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 {% set is_index = request.path.strip('/')=='tags' %}
 {% block title %}{{ "Tags" if is_index else tags.join('+') }}{% endblock %}
+{% block nav %}
+<div class="row">
+    <div class="small-12 medium-12 large-12 small-centered columns">
+        <nav>
+            <ul class="inline-list-custom">
+                <li><a href="/index">主页</a>
+                </li>
+                <li><a href="/about">联系我们</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
 {% block content %}
     {% if is_index %}
         {% set entries = get_data(type='post',limit=300, sort='desc').group('tags') %}
-        <ul class="list_with_title container">
+        <div class="row">
+        <div class="small-12 medium-12 large-12 columns">
         {% for tag, posts in entries %}
-            <li class="listing_title">{{ tag }}</li>
+            <h2>{{ tag }}</h2>
             <ul class='listing'>
             {% for post in posts %}
                 <li class="listing-item">
@@ -15,9 +30,11 @@
                 </li>
             {% endfor %}
             </ul>
+
         {% endfor %}
         {% include 'include/paginator.html' %}
-        </ul>
+        </div>
+    </div>
     {% else %}
         <div class="container" id="posts">
             {% include 'include/posts_list.html' %}

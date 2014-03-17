@@ -19,7 +19,6 @@
                         <div class="thumbnail-caption tag">
                             {% if post.tags %}
                             <span class="tags">
-                                <i class="fa fa-tags"></i>
                                 {% for tag in post.tags %}
                                 <a href="/tags/{{ tag }}">#{{ tag }}#</a>
                                 {% endfor %}
