@@ -1,0 +1,38 @@
+<div class="posts">
+    <div class="row">
+        <div class="small-12 medium-12 large-12 columns">
+            <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3 inline-list-custom">
+                {% for post in posts %}
+                <!-- Begin project -->
+                <li>
+                    <div class="thumbnail">
+                        <div class="thumbnail-img">
+                            <div class="thumbnail-hover">
+                                <a href="{{post.url}}"></a>
+                            </div>
+                            <a href="{{post.url}}">
+                                <img src="{{ post.metadata.cover }}" alt="{{post.title}}" class="cover-img" />
+                            </a>
+                        </div>
+                        <div class="thumbnail-caption"><a class="caption-link" href="{{post.url}}">{{post.title}}</a>
+                        </div>
+                        <div class="thumbnail-caption tag">
+                            {% if post.tags %}
+                            <span class="tags">
+                                <i class="fa fa-tags"></i>
+                                {% for tag in post.tags %}
+                                <a href="/tags/{{ tag }}">#{{ tag }}#</a>
+                                {% endfor %}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
+                <!-- End project -->
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+</div>
+{% include 'include/paginator.html' %}

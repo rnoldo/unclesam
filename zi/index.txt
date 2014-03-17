@@ -1,0 +1,3 @@
+cover:http://ww4.sinaimg.cn/bmiddle/743a3eb8jw1e454crvxo0j20ic0zkn1b.jpg
+description:字画集
+title:字画集

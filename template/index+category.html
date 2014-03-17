@@ -1,0 +1,53 @@
+{% extends "base.html" %} 
+{% block title %}{{ category.title or 'Categories' }}{% endblock%}
+{% block description %}
+<meta name="description" content="{{category.metadata.description}}" />
+{% endblock%}
+<!-- Content -->
+{% block nav %}
+<div class="row">
+	<div class="small-12 medium-12 large-12 small-centered columns">
+	    <nav>
+	        <ul class="inline-list-custom">
+	            <li><a href="/index" class="current">主页</a>
+	            </li>
+	            <li><a href="/about">联系我们</a>
+	            </li>
+	        </ul>
+	    </nav>
+	</div>
+</div>
+{% endblock %}
+{% block content %}
+{% if request.path not  in ['/category', '/cateogroy/', "/index", "/index/", "/"] %}
+	<div class="container" id="posts">
+		{% include 'include/posts_list.html' %}
+	</div>
+{% else %}
+	<div class="row">
+		<div class="small-12 medium-12 large-12 columns">
+			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3 inline-list-custom">
+				{% for category in categories %}
+				<!-- Begin project -->
+				<li>
+					<div class="thumbnail">
+						<div class="thumbnail-img">
+							<div class="thumbnail-hover"><a href="/category/{{ category.path }}"></a></div>
+							<a href="/category/{{ category.path }}">
+								<img src="{{ category.metadata.cover }}" class="cover-img"/>
+							</a>
+						</div>
+						<div class="thumbnail-caption">
+							<a class="caption-link" href="/category/{{ category.path }}">
+								{{ category.metadata.description }}
+							</a>
+						</div>
+					</div>
+				</li>
+				<!-- End project -->
+				{% endfor %}			
+			</ul>
+		</div>
+	</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block description %}
+    <meta name="description" content="{{post.metadata.description}}" />
+{% endblock%}
+
+{% block nav %}
+<div class="row">
+    <div class="small-12 medium-12 large-12 small-centered columns">
+        <nav>
+            <ul class="inline-list-custom">
+                <li><a href="/index">主页</a>
+                </li>
+                <li><a href="/about">联系我们</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="small-12 medium-7 large-7 columns">
+        <h2>{{post.title}}</h2>
+        <p>
+            <img src="{{ post.metadata.cover }}" class="post-cover-img" />
+        </p>
+    </div>
+    <div class="small-12 medium-5 large-5 columns">
+        <div class="lined-list">
+            <ul>
+                <li><strong>名称：</strong> {{post.title}}</li>
+                <li><strong>价格：</strong>{{ post.metadata.price }}</li>
+                <li><strong>作者：</strong>{{ post.metadata.artist }}</li>
+                <li><strong>简介：</strong>{{ post.metadata.description }}</li>
+                <li><strong>标签：</strong>
+                    {% if post.tags %}
+                        <span class="tags">
+                            {% for tag in post.tags %}
+                            <a href="/tags/{{ tag }}">#{{ tag }}#</a>
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 medium-12 large-12 columns">
+        <hr class="project-detail-hr" />
+        
+        <!-- Begin project image -->
+        <div class="project-img">
+        {{ post.content}}
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="small-12 medium-12 large-12 columns">
+        <p class="back-to-top-holder"><a class="back-to-top"><i class="fa fa-chevron-circle-up fa-3x"></i></a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="post_nav clearfix">
+            {% if pre_one %}
+                <a href="/post/{{ pre_one.url_path }}" class="post_pre">&lt;上一副：{{ pre_one.title }}</a>
+            {% endif %}
+            {% if next_one %}
+                <a href="/post/{{ next_one.url_path }}" class="post_next">下一副：{{ next_one.title }}&gt;</a>
+            {% endif %}
+    </div>
+</div>
+<div class="row">
+    {% include 'include/comments.html' %}
+</div>
+    {{ site.configs.scripts_for_post }}
+{% endblock %}
